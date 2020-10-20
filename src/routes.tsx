@@ -11,17 +11,21 @@ const {Navigator, Screen} = createStackNavigator();
 export default function Routes() {
     return (
         <NavigationContainer>
-            <Navigator screenOptions={{headerShown: false, cardStyle: {backgroundColor: "#F2F3F5"}}}>
+            <Navigator screenOptions={{cardStyle: {backgroundColor: "#F2F3F5"}}}>
                 <Screen
                     name="Main"
                     component={Main}
+                    options={{
+                        headerShown: true,
+                        header: () => <Header title="Sensound" showBackButton={false}/>
+                    }}
                 />
                 <Screen
                     name="Donate"
                     component={Donate}
                     options={{
                         headerShown: true,
-                        header: () => <Header title="Faça uma doação" showCancel={true}/>
+                        header: () => <Header title="Faça uma doação" showBackButton={true}/>
                     }}
                 />
 
