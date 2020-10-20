@@ -17,7 +17,7 @@ export default function Routes() {
                     component={Main}
                     options={{
                         headerShown: true,
-                        header: () => <Header title="Sensound" showBackButton={false}/>
+                        header: () => <Header title="Sensound" isHome={true} icon="heart"/>
                     }}
                 />
                 <Screen
@@ -25,7 +25,7 @@ export default function Routes() {
                     component={Donate}
                     options={{
                         headerShown: true,
-                        header: () => <Header title="Faça uma doação" showBackButton={true}/>
+                        header: () => <Header title="Faça uma doação" isHome={false} icon="arrow-left"/>
                     }}
                 />
 

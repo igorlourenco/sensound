@@ -6,24 +6,37 @@ import {useNavigation} from "@react-navigation/native"
 
 interface HeaderProps {
     title: string;
-    showBackButton: boolean;
+    isHome: boolean;
+    icon: string;
 }
 
-export default function Header({title, showBackButton = true}: HeaderProps) {
+export default function Header({title, isHome = true, icon}: HeaderProps) {
     const navigation = useNavigation();
 
-    function handleGoBackToHomepage() {
-        navigation.navigate('Main')
-        ;
+    function handleGoToDonate() {
+        navigation.navigate('Donate');
     }
 
     return (
-        <View style={styles.container}>
-            {showBackButton ? (<BorderlessButton onPress={navigation.goBack}>
-                <Feather name="arrow-left" size={24} color="#15B6D6"/>
-            </BorderlessButton>) : <View/>}
-            <Text style={styles.title}>{title}</Text>
-            {!showBackButton && <View/>}
+        <View>
+            {isHome ? (
+                    <View style={styles.container}>
+                        <Text style={styles.title}>{title}</Text>
+                        <BorderlessButton onPress={handleGoToDonate}>
+                            {/*<Feather name={icon} size={24} color="#15B6D6"/>*/}
+                        </BorderlessButton>
+                    </View>
+                )
+                :
+                (
+                    <View style={styles.container}>
+                        <BorderlessButton onPress={navigation.goBack}>
+                            <Feather name={icon} size={24} color="#15B6D6"/>
+                        </BorderlessButton>
+                        <Text style={styles.title}>{title}</Text>
+                    </View>
+                )
+            }
         </View>
     )
 }
@@ -42,7 +55,8 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        color: "#8FA7B6",
-        fontSize: 20
+        color: "#15B6D6",
+        fontSize: 20,
+        fontFamily: "Ubuntu_700Bold"
     }
 })
