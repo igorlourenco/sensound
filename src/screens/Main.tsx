@@ -1,8 +1,8 @@
 import React, {useRef, useState} from 'react';
-import {Dimensions, ImageBackground, StyleSheet, Text, View} from 'react-native';
-import {RectButton, ScrollView, TouchableOpacity} from "react-native-gesture-handler";
-import {useNavigation} from "@react-navigation/native";
+import {ImageBackground, StyleSheet, View} from 'react-native';
+import {RectButton, ScrollView} from "react-native-gesture-handler";
 import {Audio} from 'expo-av';
+import {LinearGradient} from 'expo-linear-gradient';
 
 const soundObject = new Audio.Sound();
 
@@ -45,9 +45,27 @@ export default function Main() {
         },
         {
             id: 5,
-            name: "Gato ronronando",
+            name: "Cafeteria com pessoas",
             uri: "https://focusli.com/static/media/coffee-shop.eb8f0e54.mp3",
             backgroundImage: "https://infatuation.imgix.net/media/images/guides/coffee-shops-nyc-for-doing-work/banners/1503937421.11.jpg?auto=format&fit=max&h=1200&w=3200"
+        },
+        {
+            id: 6,
+            name: "Rio na floresta",
+            uri: "https://focusli.com/static/media/forest-river.94f83df7.mp3",
+            backgroundImage: "https://www.ci.durham.nh.us/sites/default/files/styles/gallery500/public/imageattachments/boc_conservation/page/11101/monkman_nhscs_d14114.jpg?itok=6o4G9fQf"
+        },
+        {
+            id: 7,
+            name: "Cidade à noite",
+            uri: "https://focusli.com/static/media/city-at-night.61864bbb.mp3",
+            backgroundImage: "https://primeirapagina.to/media/42246/antonio-goncalves_prefeitura-de-palmas.jpg"
+        },
+        {
+            id: 8,
+            name: "Chuva no carro",
+            uri: "https://focusli.com/static/media/rain-on-car.6248d3ae.mp3",
+            backgroundImage: "https://mediad.publicbroadcasting.net/p/wshu/files/styles/x_large/public/201908/city-647400_960_720.jpg"
         },
 
     ]
@@ -93,36 +111,44 @@ export default function Main() {
 
 
     return (
-        <ScrollView style={styles.container} contentContainerStyle={{
-            flexGrow: 1,
-            justifyContent: "center"
-        }}>
-            {
-                <View style={styles.soundButtonsContainer}>
-                    {
-                        sounds.map((sound, index) => {
-                            return (
-                                <View key={sound.id}>
-                                    <RectButton style={styles.soundButton}
-                                                      onPress={() => handlePlaySound(sound)}>
-                                        <ImageBackground source={{uri: sound.backgroundImage}}
-                                                         imageStyle={{borderRadius: 19}}
-                                                         style={{width: "100%", height: "100%"}}/>
-                                    </RectButton>
-                                </View>
-                            )
-                        })
-                    }
-                </View>
-            }
-        </ScrollView>
+
+            <ScrollView style={styles.container} contentContainerStyle={{
+                flexGrow: 1,
+                justifyContent: "center"
+            }}>
+                {
+                    <LinearGradient
+                        // Button Linear Gradient
+                        colors={['#F9FAFC', '#095362' ]}
+                        >
+
+                    <View style={styles.soundButtonsContainer}>
+                        {
+                            sounds.map((sound, index) => {
+                                return (
+                                    <View key={sound.id}>
+                                        <RectButton style={styles.soundButton}
+                                                    onPress={() => handlePlaySound(sound)}>
+                                            <ImageBackground source={{uri: sound.backgroundImage}}
+                                                             imageStyle={{borderRadius: 19}}
+                                                             style={{width: "100%", height: "100%"}}/>
+                                        </RectButton>
+                                    </View>
+                                )
+                            })
+                        }
+                    </View>
+                    </LinearGradient>
+                }
+            </ScrollView>
+
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#DDE3F0',
     },
 
     soundButton: {
@@ -135,7 +161,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
-    soundButtonText:{
+    soundButtonText: {
         fontSize: 18,
         alignSelf: "center",
         fontFamily: "Ubuntu_500Medium",
